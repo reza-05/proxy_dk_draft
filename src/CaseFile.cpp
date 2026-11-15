@@ -21,12 +21,12 @@ void CaseFile::createDefaultConfigIfNotExists(const std::string& filePath) {
     }
 
     out << "# Name|ID|Archetype(0:CR, 1:Backbencher, 2:Topper, 3:Sleeper, 4:Latecomer, 5:Gossip)|TrueLocation|FakeLocation\n";
-    out << "Tanvir|210041101|0|Room 302 er front podium e sheet check kortesilam|Pechoner bench e boshe adda ditesilam\n";
-    out << "Sakib|210041123|1|Room 302 er last row konar bench e|CDS e boshe khabar khaitesilam\n";
-    out << "Nabila|210041145|2|First row te boshe lab report likhtesilam|Room 302 er bairer corridor e\n";
-    out << "Rafi|210041156|3|Room 302 er 4 number desk e ghumaitesilam|Sir er table er kache\n";
-    out << "Fahim|210041178|4|Room 302 er dorja diye dauraya dhuktesilam|Rocket e cha khaitesilam\n";
-    out << "Farhana|210041199|5|Room 302 er water cooler er pashe chilam|CDS er dining e boshe gossip kortesilam\n";
+    out << "Tanvir|210041101|0|Room 302 er shamne sheet pass kortesilam|First bench e boshe lab sheet check kortesilam\n";
+    out << "Sakib|210041123|1|Room 302 er last bench e chil kortesilam|CDS e breakfast khaitesilam\n";
+    out << "Nabila|210041145|2|Room 302 er first row te lab report likhtesilam|Corridor e sir er sign nite gesilam\n";
+    out << "Rafi|210041156|3|Room 302 er 3 number desk e ghumaitesilam|Washroom e mukhe pani dite gesilam\n";
+    out << "Fahim|210041178|4|Boardbazar jam e atka theke dauraya ashsi|Rocket e cha khaitesilam tai late hoise\n";
+    out << "Farhana|210041199|5|Room 302 er majhkhaner row te boshsilam|CDS e kotha boltisilam tai deri hoise\n";
 
     out.close();
 }

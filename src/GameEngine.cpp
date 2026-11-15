@@ -438,7 +438,7 @@ void GameEngine::startGame() {
 
     std::cout << "\n📢 INCIDENT REPORT (WEEK 2, SHOKAL 8:00 AM, ROOM 302):\n";
     std::cout << "Sir dekhlen 40 jon enrolled student er jaygay sheet e 45 ta sign pore gese!\n";
-    std::cout << "CDS e khabar ar Rocket e cha sesh kore keu 5 ta batpar proxy dise!\n";
+    std::cout << "Class er keu na keu hall e ghumano friend er jonno 5 ta fake proxy maira dise!\n";
     std::cout << "Round 4 shesh howar agei Proxy King re dhoro!\n";
 
     while (!m_isGameOver) {
