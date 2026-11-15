@@ -7,10 +7,10 @@
 **PROXY DILO KE? — The IUT Attendance Mystery**
 
 ### Team Members:
-1. **Md. Shifat Reza** (Student ID: 210041001)
-2. **Abrar Faiyaz** (Student ID: 210041002)
-3. **Saraf** (Student ID: 210041003)
-4. **Ariyan** (Student ID: 210041004)
+1. **Saraf** (Student ID: 210041001)
+2. **Md. Shifat Reza** (Student ID: 210041002)
+3. **Arian** (Student ID: 210041003)
+4. **Tamim** (Student ID: 210041004)
 
 ---
 
@@ -68,10 +68,10 @@ This project strictly adheres to all core OOP principles mandated in the CSE 430
 
 | Member | Designated Role | Specific Class Deliverables |
 | :--- | :--- | :--- |
-| **Md. Shifat Reza** | Contradiction Logic & Scoring Systems | `Suspect::hasContradiction()`, Scoring logic, Investigation flow |
-| **Abrar Faiyaz** | Character Domain & OOP Hierarchy | `Character.h/.cpp`, `Detective.h/.cpp`, `Suspect.h/.cpp` |
 | **Saraf** | Narrative, Dialogue & File I/O | `Personality.h/.cpp`, `Statement.h/.cpp`, `CaseFile.h/.cpp` |
-| **Ariyan** | Engine Orchestration & Exceptions | `GameEngine.h/.cpp`, `Exceptions.h/.cpp`, `TerminalColor.h`, `main.cpp`, `Makefile` |
+| **Md. Shifat Reza** | Contradiction Logic & Scoring Systems | `Suspect::hasContradiction()`, Scoring logic, Investigation flow |
+| **Arian** | Engine Orchestration & Exceptions | `GameEngine.h/.cpp`, `Exceptions.h/.cpp`, `TerminalColor.h`, `main.cpp`, `Makefile` |
+| **Tamim** | Character Domain & OOP Hierarchy | `Character.h/.cpp`, `Detective.h/.cpp`, `Suspect.h/.cpp` |
 
 ---
 

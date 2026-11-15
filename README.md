@@ -116,7 +116,7 @@ All exceptions are caught gracefully inside `GameEngine` and `main.cpp` using hi
 
 ## 8. Authors & Contributions
 
-* **Md. Shifat Reza**: Contradiction Validation Logic, Scoring Balance, and Investigation Flow.
-* **Abrar Faiyaz**: Project Conceptualization, Character Hierarchy (`Character`, `Detective`, `Suspect`), Polymorphic Methods.
 * **Saraf**: Narrative, Dialogue & File I/O (`Personality`, `Statement`, `CaseFile`).
-* **Ariyan**: Engine Orchestration & Exceptions (`GameEngine`, `Exceptions`, `TerminalColor`, `main.cpp`, `Makefile`).
+* **Md. Shifat Reza**: Contradiction Validation Logic, Scoring Balance, and Investigation Flow.
+* **Arian**: Engine Orchestration & Exceptions (`GameEngine`, `Exceptions`, `TerminalColor`, `main.cpp`, `Makefile`).
+* **Tamim**: Character Domain & OOP Hierarchy (`Character`, `Detective`, `Suspect`).

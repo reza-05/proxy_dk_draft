@@ -77,7 +77,7 @@ void GameEngine::setupDetectives() {
         }
     }
 
-    std::vector<std::string> defaultNames = {"Shifat (Lead Detective)", "Abrar", "Saraf", "Ariyan"};
+    std::vector<std::string> defaultNames = {"Saraf", "Shifat", "Arian", "Tamim"};
     for (int i = 0; i < count; ++i) {
         std::cout << "Enter Detective #" << (i + 1) << " Name [Default: " << Color::CYAN << defaultNames[i] << Color::RESET << "]: ";
         std::string name;
