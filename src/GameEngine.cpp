@@ -89,25 +89,24 @@ void GameEngine::setupDetectives() {
 void GameEngine::printMenu() const {
     std::cout << "\n----------------------------------------------------------------------\n";
     std::cout << " ROUND " << m_currentRound << "/" << MAX_ROUNDS
-              << " | Actions Left: " << m_actionsLeft << "/" << ACTIONS_PER_ROUND
+              << " | Actions Baki: " << m_actionsLeft << "/" << ACTIONS_PER_ROUND
               << " | Squad Score: " << getTeamScore() << " pts\n";
     std::cout << "----------------------------------------------------------------------\n";
-    std::cout << "  [1] Interrogate a Suspect             (Cost: 1 Action)\n";
-    std::cout << "  [2] Challenge a Contradiction (Liar!) (Cost: 1 Action)\n";
-    std::cout << "  [3] High-Stakes Russian Roulette      (Killer's Confrontation)\n";
-    std::cout << "  [4] The Narrator's Gamble             (Guess 1-4 for Bonuses)\n";
-    std::cout << "  [5] Review Evidence & Case Log\n";
-    std::cout << "  [6] Inspect Suspect Dossier\n";
-    std::cout << "  [7] Call Class Trial & Cast Vote      (End of Round Accusation)\n";
-    std::cout << "  [8] Concede & Exit Game\n";
+    std::cout << "  [1] Suspect re Jera koro              (Cost: 1 Action)\n";
+    std::cout << "  [2] Contradiction Dhoro / Batpar dhora! (Cost: 1 Action)\n";
+    std::cout << "  [3] High-Stakes Russian Roulette       (Risk-Reward Gamble)\n";
+    std::cout << "  [4] Narrator er 1-4 Gamble             (Secret Clue er jonno)\n";
+    std::cout << "  [5] Evidence & Case Log Dekho\n";
+    std::cout << "  [6] Suspect Dossier Dekho\n";
+    std::cout << "  [7] Classroom Trial & Vote Dao         (Round Shesh korar Vote)\n";
+    std::cout << "  [8] Khela bondho kore Exit koro\n";
     std::cout << "----------------------------------------------------------------------\n";
-    std::cout << "Choose an action (1-8): ";
+    std::cout << "Ekta option choose koro (1-8): ";
 }
 
 void GameEngine::handleInterrogate() {
     if (m_actionsLeft <= 0) {
-        std::cout << "\n⚠️ No actions left in Round " << m_currentRound
-                  << "! You must Call Class Trial & Cast Vote [7] to proceed.\n";
+        std::cout << "\n⚠️ Ei round er shob action sesh! Please Classroom Trial & Vote [7] dao.\n";
         return;
     }
 
@@ -123,7 +122,7 @@ void GameEngine::handleInterrogate() {
         std::cout << "\n";
     }
 
-    std::cout << "Select suspect (1-" << m_suspects.size() << ") or 0 to cancel: ";
+    std::cout << "Suspect select koro (1-" << m_suspects.size() << ") ba cancel korte 0: ";
     int choice;
     if (!(std::cin >> choice) || choice < 0 || choice > static_cast<int>(m_suspects.size())) {
         std::cin.clear();
@@ -135,17 +134,17 @@ void GameEngine::handleInterrogate() {
     size_t sIdx = choice - 1;
 
     if (m_suspects[sIdx].isExposed()) {
-        throw SuspectUnavailableException(m_suspects[sIdx].getName() + " has already been exposed!");
+        throw SuspectUnavailableException(m_suspects[sIdx].getName() + " already exposed hoye gese!");
     }
     if (m_suspects[sIdx].isSilenced()) {
-        throw SuspectUnavailableException(m_suspects[sIdx].getName() + " is terrified and refuses to speak!");
+        throw SuspectUnavailableException(m_suspects[sIdx].getName() + " voy peye gese, kotha bolbe na!");
     }
 
-    std::cout << "\n--- SELECT QUESTION TOPIC ---\n";
-    std::cout << "  [1] Where were you during attendance roll call?\n";
-    std::cout << "  [2] Did you notice anyone acting suspicious near the teacher's podium?\n";
-    std::cout << "  [3] Who can verify your alibi during lecture?\n";
-    std::cout << "Select topic (1-3): ";
+    std::cout << "\n--- JIGESHBADER TOPIC SELECT KORO ---\n";
+    std::cout << "  [1] Roll call er shomoy tumi koi chila?\n";
+    std::cout << "  [2] Podium ba sir er desk er kache kaoke suspicious dekhso?\n";
+    std::cout << "  [3] Lecture er shomoy tomar alibi ke confirm korbe?\n";
+    std::cout << "Topic select koro (1-3): ";
 
     int tChoice;
     if (!(std::cin >> tChoice) || tChoice < 1 || tChoice > 3) {
@@ -202,14 +201,14 @@ void GameEngine::handleChallengeContradiction() {
     std::cout << "  INVESTIGATION CHALLENGE: " << m_suspects[sIdx].getName() << "\n";
     std::cout << "------------------------------------------------------\n";
     if (caught) {
-        std::cout << "🎉 BUSTED! Contradiction Proven!\n";
+        std::cout << "🎉 DHOMA-DHAM DHORA KHAISI! Contradiction dhora porse!\n";
         std::cout << "Details: " << details << "\n";
-        std::cout << "(+3 Investigation Points awarded!)\n";
+        std::cout << "(+3 Investigation Points squad er score e jog hoise!)\n";
         addTeamScore(3);
     } else {
-        std::cout << "❌ No contradiction found!\n";
+        std::cout << "❌ Kono contradiction paowa jay nai!\n";
         std::cout << details << "\n";
-        std::cout << "The suspect's story holds up. (-1 Point for baseless challenge)\n";
+        std::cout << "Suspect er kotha thik ache. (-1 Point bina karone challenge korar jonno)\n";
         deductTeamScore(1);
     }
     std::cout << "------------------------------------------------------\n";
@@ -340,28 +339,28 @@ void GameEngine::handleClassVote() {
         return;
     }
 
-    std::cout << "\n💥 The Teacher demands: \"" << m_suspects[sIdx].getName()
-              << ", step forward and show your student handbook!\"\n";
+    std::cout << "\n💥 Teacher bolen: \"" << m_suspects[sIdx].getName()
+              << ", shamne eshe nijer student ID khata dekhaw!\"\n";
     m_suspects[sIdx].exposeRole();
     RoleType role = m_suspects[sIdx].getRole();
 
     if (role == RoleType::PROXY_KING) {
-        std::cout << "\n🏆 BINGO! JACKPOT!\n";
-        std::cout << "👑 " << m_suspects[sIdx].getName() << " IS THE PROXY KING!\n";
-        std::cout << "Found hiding multiple attendance cards in their bag!\n";
-        std::cout << "(+10 Investigation Points awarded!)\n";
+        std::cout << "\n🏆 BINGO! KHELA KHOTOM! 👑\n";
+        std::cout << "👑 " << m_suspects[sIdx].getName() << " E ASHELE PROXY KING!\n";
+        std::cout << "Bag er bhitor theke aro 5 ta fake attendance card paowa gese!\n";
+        std::cout << "(+10 Investigation Points squad er score e jog hoise!)\n";
         addTeamScore(10);
         m_detectivesWon = true;
         m_isGameOver = true;
     } else if (role == RoleType::PROXY_MEMBER) {
-        std::cout << "\n🎯 SUCCESS! " << m_suspects[sIdx].getName() << " is a PROXY GANG OPERATIVE!\n";
-        std::cout << "They were signing fake initials, but the mastermind remains uncaught!\n";
-        std::cout << "(+5 Investigation Points awarded!)\n";
+        std::cout << "\n🎯 TARGET HIT! " << m_suspects[sIdx].getName() << " PROXY GANG ER OPERATIVE!\n";
+        std::cout << "O onner proxy ditsilo, but ashol Mastermind ekhono dhora pore nai!\n";
+        std::cout << "(+5 Investigation Points squad er score e jog hoise!)\n";
         addTeamScore(5);
     } else {
-        std::cout << "\n❌ DISASTER! " << m_suspects[sIdx].getName() << " is an INNOCENT STUDENT!\n";
-        std::cout << "\"How could you suspect me?! I have 95% attendance!\"\n";
-        std::cout << "(-3 Points penalty for false accusation!)\n";
+        std::cout << "\n❌ SERIOUS VUL! " << m_suspects[sIdx].getName() << " EKDOM INNOCENT CHILO!\n";
+        std::cout << "\"Bhai amar attendance 95%, amar upore doubt korlen?!\"\n";
+        std::cout << "(-3 Points penalty vul allegation dewar jonno!)\n";
         deductTeamScore(3);
     }
 
@@ -393,12 +392,12 @@ void GameEngine::checkGameConditions() {
     std::cout << "======================================================\n";
 
     if (m_detectivesWon) {
-        std::cout << "🎉 VICTORY! The Student Investigation Squad triumphs!\n";
-        std::cout << "The Proxy Syndicate has been dismantled at IUT!\n";
+        std::cout << "🎉 VICTORY! Student Investigation Squad jitse!\n";
+        std::cout << "IUT Room 302 er Proxy Syndicate pura bhenge dewa hoise!\n";
     } else {
-        std::cout << "💀 DEFEAT! Time ran out!\n";
-        std::cout << "The real Proxy King was: [" << m_proxyKingName << "]!\n";
-        std::cout << "They successfully escaped punishment and graduated with 100% proxy attendance!\n";
+        std::cout << "💀 DEFEAT! Shomoy shesh hoye gese!\n";
+        std::cout << "Ashol Proxy King chilo: [" << m_proxyKingName << "]!\n";
+        std::cout << "O 100% proxy attendance niye pass kore ber hoye gelo!\n";
     }
 
     std::cout << "\nFINAL TEAM SCORE: " << getTeamScore() << " POINTS\n";
@@ -432,10 +431,10 @@ void GameEngine::startGame() {
 
     setupDetectives();
 
-    std::cout << "\n📢 INCIDENT REPORT (WEEK 2, 8:00 AM IN ROOM 302):\n";
-    std::cout << "Sir noticed that out of 40 enrolled students, 45 signed the sheet!\n";
-    std::cout << "5 illegal proxies were placed after CDS breakfast and Rocket cha runs.\n";
-    std::cout << "Uncover the Proxy King before Round 4 ends!\n";
+    std::cout << "\n📢 INCIDENT REPORT (WEEK 2, SHOKAL 8:00 AM, ROOM 302):\n";
+    std::cout << "Sir dekhlen 40 jon enrolled student er jaygay sheet e 45 ta sign pore gese!\n";
+    std::cout << "CDS e khabar ar Rocket e cha sesh kore keu 5 ta batpar proxy dise!\n";
+    std::cout << "Round 4 shesh howar agei Proxy King re dhoro!\n";
 
     while (!m_isGameOver) {
         printMenu();

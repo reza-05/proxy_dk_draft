@@ -11,84 +11,84 @@ std::string Personality::formatDialogue(Archetype archetype, QuestionTopic topic
         case Archetype::CR:
             if (topic == QuestionTopic::LOCATION_DURING_ROLLCALL) {
                 response = isLie
-                    ? "Bro, trust me, I was at " + location + " organizing the slides for Room 302!"
-                    : "As the CR, I was strictly at " + location + " monitoring the official attendance folder for Room 302.";
+                    ? "Arey bhai bisshash kor, ami to " + location + "! 302 er slide ready kortesilam!"
+                    : "Ami CR hoye " + location + "! 302 er official attendance sheet strictly monitor kortesilam.";
             } else if (topic == QuestionTopic::SUSPICIOUS_ACTIVITY) {
                 response = isLie
-                    ? "Everything looked 100% fine in Room 302. But honestly, " + witness + " seemed awfully fidgety."
-                    : "I swear I noticed someone scribbling rapid proxy signatures when sir turned toward the whiteboard.";
+                    ? "302 te shob e normal chilo bhai. But " + witness + " re ektu nervous lagtesilo."
+                    : "Sir jokhon whiteboard er dike ghursilo, ami dekhsi ke jani sheet e 2-3 ta fake sign maira dilo!";
             } else {
-                response = "Ask " + witness + ", they know I take my section responsibilities seriously!";
+                response = "Tora " + witness + " re jiges kor, o jane ami CR hishebe koto serious!";
             }
             break;
 
         case Archetype::BACKBENCHER:
             if (topic == QuestionTopic::LOCATION_DURING_ROLLCALL) {
                 response = isLie
-                    ? "Arey mama, I was chilling at " + location + ". No cap!"
-                    : "I was hanging out at " + location + ", observing everyone's movements in Room 302.";
+                    ? "Arey mama, ami to " + location + " chil kortesilam. Kono churi kori nai!"
+                    : "Mama ami shanti moto " + location + " boshe shobar kando-karkhana observe kortesilam.";
             } else if (topic == QuestionTopic::SUSPICIOUS_ACTIVITY) {
                 response = isLie
-                    ? "Nobody did anything wrong! We were just planning to go to Rocket for cha! Why interrogate me like proctor sir?!"
-                    : "Mama, look closely at " + proxyKingName + ". Shady moves around the podium right before roll call.";
+                    ? "Keu kono proxy dei nai mama! Proctor sir er moto amar piche lagso ken?!"
+                    : "Mama, " + proxyKingName + " er dike ektu bhalo kore takao. Roll call er agei podium er kache ghurgur kortesilo!";
             } else {
-                response = "Check with " + witness + ". We were literally at CDS together having breakfast.";
+                response = "Check kor " + witness + " er shathe. Amra eksathe chil kortesilam.";
             }
             break;
 
         case Archetype::TOPPER:
             if (topic == QuestionTopic::LOCATION_DURING_ROLLCALL) {
                 response = isLie
-                    ? "I was briefly at " + location + " reviewing lab experiment proofs."
-                    : "I was seated at " + location + " in Room 302 with my lab report open before 8:00 AM sharp.";
+                    ? "Ami to " + location + " lab er calculation recheck kortesilam."
+                    : "Ami shokal 8:00 tar age thekei 302 er " + location + " khata khule boshe chilam.";
             } else if (topic == QuestionTopic::SUSPICIOUS_ACTIVITY) {
                 response = isLie
-                    ? "I don't bother looking around during class. But " + witness + " was wandering near the desk."
-                    : "Proxies undermine academic integrity! I saw someone slip extra attendance slips near the desk.";
+                    ? "Ami lab e onnoder dike takai na. Tobe " + witness + " table er kache ghurtisilo."
+                    : "Proxy dewa puro unfair! Sir takanor age ke jani table er upore pen chalaia shoray felse!";
             } else {
-                response = witness + " can verify my code was being copied by half the room.";
+                response = witness + " jane amar theke shobai lab er code copy kortesilo, ami proxy dite jabo ken?";
             }
             break;
 
         case Archetype::SLEEPER:
             if (topic == QuestionTopic::LOCATION_DURING_ROLLCALL) {
                 response = isLie
-                    ? "*Yawns* Uhh... I think I was awake at " + location + "..."
-                    : "*Wipes eyes* I was dead asleep at " + location + " in Room 302 until the lab ended.";
+                    ? "*Hai tule* Bhai... ami mone hoi " + location + " chilam..."
+                    : "*Chokh moshe* Mama ami 302 te " + location + " ghum e behush chilam lab shesh howa porjonto.";
             } else if (topic == QuestionTopic::SUSPICIOUS_ACTIVITY) {
                 response = isLie
-                    ? "I didn't see anything... I just had a dream that someone promised to buy me cha at Rocket."
-                    : "I half-opened my eyes and saw someone signing two names hurriedly in row 3!";
+                    ? "Ami toh ghumaitesilam... shopne mone hoi dekhsilam " + witness + " hete jacche."
+                    : "Ami adho-ghume chokh khule dekhsilam ke jani sheet er moddhe 2ta sign dhorse!";
             } else {
-                response = "*Stretches* Ask " + witness + ", their snoring on the next bench woke me up.";
+                response = "*High tulte tulte* " + witness + " re jiga, or snore e amar ghum bhaangsilo.";
             }
             break;
 
         case Archetype::LATECOMER:
             if (topic == QuestionTopic::LOCATION_DURING_ROLLCALL) {
                 response = isLie
-                    ? "Boardbazar traffic was brutal, so I barely reached " + location + " when roll call started!"
-                    : "The IUT bus was stuck! I grabbed a quick cha at Rocket and sprinted to " + location + " right as sir called names.";
+                    ? "Boardbazar er traffic e pura atka chilam mama! Tai " + location + " thaka obosthay roll call shuru hoise."
+                    : "IUT bus late korsilo! Rocket e ek cup cha kheye dauraia " + location + " ashsi thik sir jokhon naam daktese!";
             } else if (topic == QuestionTopic::SUSPICIOUS_ACTIVITY) {
                 response = isLie
-                    ? "I was too exhausted from running to notice. Maybe " + witness + " knows something?"
-                    : "When I rushed past the podium into Room 302, the sheet already had extra signatures!";
+                    ? "Dauraye ashte ashte matha ghurtesilo, " + witness + " mone hoi kichu ekta janbe!"
+                    : "Ami dauraia 302 te dhukar shomoy e dekhsilam sheet e enroll er cheye beshi checkmark chilo!";
             } else {
-                response = witness + " saw me sprinting up to Room 302 completely out of breath!";
+                response = witness + " nije dekhse ami 302 te dauraia dhukte giye hapaitesilam!";
             }
             break;
 
         case Archetype::GOSSIP_MASTER:
             if (topic == QuestionTopic::LOCATION_DURING_ROLLCALL) {
                 response = isLie
-                    ? "I was definitely at " + location + ", but you didn't hear that from me."
-                    : "I was stationed at " + location + ", gathering all the latest department tea.";
+                    ? "Ami oboshshoi " + location + " chilam, kintu eta kintu ami bolinai!"
+                    : "Ami " + location + " daraye department er shob latest khobor collect kortesilam.";
             } else if (topic == QuestionTopic::SUSPICIOUS_ACTIVITY) {
                 response = isLie
-                    ? "Overheard at CDS: rumor has it that " + witness + " charges 50 taka per proxy signature!"
-                    : "Listen closely: the real Proxy King was seen passing tokens outside CDS before class!";
+                    ? "CDS e shunsilam " + witness + " naki 50 taka kore per proxy sign er deal nitasilo!"
+                    : "Kan khule shuno: ashol Proxy King class er agei code share kortesilo!";
             } else {
-                response = "Go ask " + witness + ", but don't tell them I sent you!";
+                response = "Jaia " + witness + " re jiges koro, kintu amar naam nio na abar!";
             }
             break;
     }

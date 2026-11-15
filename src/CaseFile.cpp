@@ -21,12 +21,12 @@ void CaseFile::createDefaultConfigIfNotExists(const std::string& filePath) {
     }
 
     out << "# Name|ID|Archetype(0:CR, 1:Backbencher, 2:Topper, 3:Sleeper, 4:Latecomer, 5:Gossip)|TrueLocation|FakeLocation\n";
-    out << "Tanvir|210041101|0|Room 302 front podium checking sheet|Back bench chatting with friends\n";
-    out << "Sakib|210041123|1|Last row corner bench in Room 302|CDS eating breakfast\n";
-    out << "Nabila|210041145|2|First row taking lecture notes|Outside Room 302 corridor\n";
-    out << "Rafi|210041156|3|Room 302 row 4 desk sleeping soundly|Near the teacher's podium desk\n";
-    out << "Fahim|210041178|4|Room 302 back door entering breathless|Rocket having morning cha\n";
-    out << "Farhana|210041199|5|Room 302 water cooler observing|CDS dining hall checking gossips\n";
+    out << "Tanvir|210041101|0|Room 302 er front podium e sheet check kortesilam|Pechoner bench e boshe adda ditesilam\n";
+    out << "Sakib|210041123|1|Room 302 er last row konar bench e|CDS e boshe khabar khaitesilam\n";
+    out << "Nabila|210041145|2|First row te boshe lab report likhtesilam|Room 302 er bairer corridor e\n";
+    out << "Rafi|210041156|3|Room 302 er 4 number desk e ghumaitesilam|Sir er table er kache\n";
+    out << "Fahim|210041178|4|Room 302 er dorja diye dauraya dhuktesilam|Rocket e cha khaitesilam\n";
+    out << "Farhana|210041199|5|Room 302 er water cooler er pashe chilam|CDS er dining e boshe gossip kortesilam\n";
 
     out.close();
 }

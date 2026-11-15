@@ -1,7 +1,7 @@
 # Name|ID|Archetype(0:CR, 1:Backbencher, 2:Topper, 3:Sleeper, 4:Latecomer, 5:Gossip)|TrueLocation|FakeLocation
-Tanvir|210041101|0|Room 302 front podium checking sheet|Back bench chatting with friends
-Sakib|210041123|1|Last row corner bench in Room 302|CDS eating breakfast
-Nabila|210041145|2|First row taking lecture notes|Outside Room 302 corridor
-Rafi|210041156|3|Room 302 row 4 desk sleeping soundly|Near the teacher's podium desk
-Fahim|210041178|4|Room 302 back door entering breathless|Rocket having morning cha
-Farhana|210041199|5|Room 302 water cooler observing|CDS dining hall checking gossips
+Tanvir|210041101|0|Room 302 er front podium e sheet check kortesilam|Pechoner bench e boshe adda ditesilam
+Sakib|210041123|1|Room 302 er last row konar bench e|CDS e boshe khabar khaitesilam
+Nabila|210041145|2|First row te boshe lab report likhtesilam|Room 302 er bairer corridor e
+Rafi|210041156|3|Room 302 er 4 number desk e ghumaitesilam|Sir er table er kache
+Fahim|210041178|4|Room 302 er dorja diye dauraya dhuktesilam|Rocket e cha khaitesilam
+Farhana|210041199|5|Room 302 er water cooler er pashe chilam|CDS er dining e boshe gossip kortesilam
