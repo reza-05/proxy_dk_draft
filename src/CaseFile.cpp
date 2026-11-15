@@ -21,12 +21,12 @@ void CaseFile::createDefaultConfigIfNotExists(const std::string& filePath) {
     }
 
     out << "# Name|ID|Archetype(0:CR, 1:Backbencher, 2:Topper, 3:Sleeper, 4:Latecomer, 5:Gossip)|TrueLocation|FakeLocation\n";
-    out << "Tanvir|210041101|0|Front podium checking sheet|Back bench chatting\n";
-    out << "Sakib|210041123|1|Last row corner bench|Library reading room\n";
-    out << "Nabila|210041145|2|First row taking lecture notes|Outside room 402 corridor\n";
-    out << "Rafi|210041156|3|Row 4 desk sleeping soundly|Near the teacher's podium\n";
-    out << "Fahim|210041178|4|Back door entering breathless|Cafeteria getting tea\n";
-    out << "Farhana|210041199|5|Water dispenser hallway|Near the attendance desk\n";
+    out << "Tanvir|210041101|0|Room 302 front podium checking sheet|Back bench chatting with friends\n";
+    out << "Sakib|210041123|1|Last row corner bench in Room 302|CDS eating breakfast\n";
+    out << "Nabila|210041145|2|First row taking lecture notes|Outside Room 302 corridor\n";
+    out << "Rafi|210041156|3|Room 302 row 4 desk sleeping soundly|Near the teacher's podium desk\n";
+    out << "Fahim|210041178|4|Room 302 back door entering breathless|Rocket having morning cha\n";
+    out << "Farhana|210041199|5|Room 302 water cooler observing|CDS dining hall checking gossips\n";
 
     out.close();
 }

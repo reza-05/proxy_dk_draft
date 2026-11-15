@@ -432,9 +432,10 @@ void GameEngine::startGame() {
 
     setupDetectives();
 
-    std::cout << "\n📢 INCIDENT REPORT (WEEK 2, 8:00 AM CSE LAB):\n";
+    std::cout << "\n📢 INCIDENT REPORT (WEEK 2, 8:00 AM IN ROOM 302):\n";
     std::cout << "Sir noticed that out of 40 enrolled students, 45 signed the sheet!\n";
-    std::cout << "5 illegal proxies were placed. Uncover the Proxy King before Round 4 ends!\n";
+    std::cout << "5 illegal proxies were placed after CDS breakfast and Rocket cha runs.\n";
+    std::cout << "Uncover the Proxy King before Round 4 ends!\n";
 
     while (!m_isGameOver) {
         printMenu();
