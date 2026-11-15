@@ -4,9 +4,9 @@
 ---
 
 ## 1. Project Overview & Storyline
-**"Proxy Dilo Ke? The IUT Attendance Mystery"** is a social deduction and text-based investigation game set in a university classroom. During an 8:00 AM lab, 45 signatures were found on the attendance sheet despite only 40 students being present. Five illegal proxies were placed by a clandestine syndicate.
+**"Proxy Dilo Ke? The IUT Attendance Mystery"** is a social deduction and text-based investigation game set in an IUT classroom (Room 302). During an 8:00 AM lab, 45 verbal roll call responses ("Present sir") were recorded despite only 40 students physically sitting in the room. Five illicit voice-imitation proxies were placed by a clandestine campus network.
 
-A team of up to 4 student detectives must interrogate suspects, analyze alibis, cross-reference statements to catch contradictions, and face high-stakes gambles (Russian Roulette & Narrator's Gamble) to unmask the **Proxy King** before Round 4 ends.
+A team of up to 4 student detectives must question classroom suspects, analyze alibis, catch verbal contradictions across rounds, and cast expulsion votes to unmask the **Proxy King** before Round 4 ends.
 
 ---
 
@@ -59,7 +59,6 @@ External configuration files are located under the `data/` folder:
 | **`Suspect`** | `Suspect.h` / `Suspect.cpp` | Derived from `Character`. Represents automated student suspects. | `m_archetype`, `m_role`, `m_isExposed`, `m_history`, `m_trueLocation`, `m_fakeLocation` | `interrogate()`, `hasContradiction()`, `exposeRole()`, `displayProfile() override` |
 | **`Statement`** | `Statement.h` / `Statement.cpp` | Encapsulates a single question-and-answer record. | `m_round`, `m_topic`, `m_dialogue`, `m_locationClaim`, `m_isLie` | `getDialogue()`, `getLocationClaim()`, `isLie()` |
 | **`Personality`** | `Personality.h` / `Personality.cpp` | Formats realistic dialogue responses based on student archetypes (CR, Backbencher, etc.). | N/A (Static Utility) | `formatDialogue()` |
-| **`GambleEngine`** | `GambleEngine.h` / `GambleEngine.cpp` | Russian Roulette (1 in 6) and Narrator's Gamble (1-4) risk-reward system. | `m_rng` (Mersenne Twister) | `playRussianRoulette()`, `playNarratorGamble()` |
 | **`CaseFile`** | `CaseFile.h` / `CaseFile.cpp` | Handles File I/O for loading suspects and archiving results. | N/A | `loadSuspectsFromFile()`, `saveCaseArchive()` |
 | **`GameEngine`** | `GameEngine.h` / `GameEngine.cpp` | Coordinates the game loop, menus, action points, and scoring. | `m_detectives`, `m_suspects`, `m_evidenceLog`, `m_currentRound` | `startGame()`, `handleInterrogate()`, `handleClassVote()` |
 
@@ -90,7 +89,7 @@ External configuration files are located under the `data/` folder:
 ### C. Composition & Ownership
 * `GameEngine` **owns** a collection of `Detective` instances and `Suspect` instances (`std::vector<Detective>`, `std::vector<Suspect>`).
 * `Suspect` **owns** a collection of past statements (`std::vector<Statement>`) to detect inconsistencies and contradictions across rounds.
-* `GameEngine` uses `GambleEngine` and `CaseFile` as helper services.
+* `GameEngine` uses `CaseFile` as a helper service for file persistence.
 
 ---
 
@@ -100,7 +99,7 @@ The system defines custom exceptions derived from `std::exception` under namespa
 * **`ProxyGameException`**: Base exception class for all domain-specific errors.
 * **`InvalidInputException`**: Thrown when a player supplies an out-of-range option, malformed integer, or invalid string.
 * **`FileNotFoundException`**: Thrown if `data/case_config.txt` cannot be read or opened.
-* **`SuspectUnavailableException`**: Thrown if attempting to interrogate an already-exposed or silenced suspect.
+* **`SuspectUnavailableException`**: Thrown if attempting to interrogate an already-exposed suspect.
 * **`GameOverException`**: Raised during unexpected state termination.
 
 All exceptions are caught gracefully inside `GameEngine` and `main.cpp` using hierarchical `try-catch` blocks, preventing raw program crashes.
@@ -117,7 +116,7 @@ All exceptions are caught gracefully inside `GameEngine` and `main.cpp` using hi
 
 ## 8. Authors & Contributions
 
-* **Md. Shifat Reza**: Core Game Concept, Gamble Engine (Russian Roulette & Narrator's Gamble), Scoring and Risk-Reward Balance.
+* **Md. Shifat Reza**: Contradiction Validation Logic, Scoring Balance, and Investigation Flow.
 * **Abrar Faiyaz**: Project Conceptualization, Character Hierarchy (`Character`, `Detective`, `Suspect`), Polymorphic Methods.
-* **Saraf**: Dialogue & Personality System (`Personality`, `Statement`), File I/O & Case Configuration (`CaseFile`).
-* **Ariyan**: Game Loop & Round State Machine (`GameEngine`), Menu Navigation, Custom Exception Hierarchy (`Exceptions`).
+* **Saraf**: Narrative, Dialogue & File I/O (`Personality`, `Statement`, `CaseFile`).
+* **Ariyan**: Engine Orchestration & Exceptions (`GameEngine`, `Exceptions`, `TerminalColor`, `main.cpp`, `Makefile`).

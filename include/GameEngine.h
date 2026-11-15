@@ -4,7 +4,6 @@
 #include <memory>
 #include "Detective.h"
 #include "Suspect.h"
-#include "GambleEngine.h"
 
 namespace ProxyMystery {
 
@@ -12,7 +11,6 @@ class GameEngine {
 private:
     std::vector<Detective> m_detectives;
     std::vector<Suspect> m_suspects;
-    GambleEngine m_gambleEngine;
     std::string m_proxyKingName;
     int m_currentRound;
     static constexpr int MAX_ROUNDS = 4;
@@ -29,8 +27,6 @@ private:
     void handleInterrogate();
     void handleReviewLog() const;
     void handleChallengeContradiction();
-    void handleRussianRoulette();
-    void handleNarratorGamble();
     void handleClassVote();
     void handleDossier() const;
     void endRound();

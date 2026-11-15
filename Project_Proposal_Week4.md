@@ -15,11 +15,11 @@
 ---
 
 ### 1. Project Motivation & Problem Statement
-Attendance manipulation through illicit proxies is an age-old phenomenon across academic institutions. In our university setting, keeping attendance transparent and fair is critical. 
+Attendance manipulation through illicit proxies is an age-old phenomenon across academic institutions. In a university classroom setting, vocal roll calls are conducted where students verbally respond "Present sir". However, absent students often have proxies placed on their behalf by friends imitating voices.
 
 *Proxy Dilo Ke?* takes inspiration from classic social deduction games (such as Mafia and Werewolf) and transforms the premise into a university-themed, text-based interactive investigation game built purely in modern C++ (C++20). 
 
-A detective squad consisting of up to 4 human students must work collaboratively on a terminal console to expose a hidden "Proxy Syndicate" operating within a classroom, uncover the mastermind **"Proxy King"**, and interrogate AI-controlled student suspects before the semester ends.
+A detective squad consisting of up to 4 human students must work collaboratively on a terminal console to expose a hidden "Proxy Syndicate" operating within Room 302, uncover the mastermind **"Proxy King"**, and interrogate AI-controlled student suspects before the semester ends.
 
 ---
 
@@ -31,8 +31,8 @@ A detective squad consisting of up to 4 human students must work collaboratively
    Detectives can question different classroom archetypes (e.g., The CR, The Backbencher, The Topper, The Sleeper, The Latecomer, The Gossip Master) regarding their whereabouts, observations, and alibis during roll call.
 3. **Contradiction Detection:**
    Honest students provide factual, consistent accounts. Members of the Proxy Syndicate fabricate stories. If a suspect contradicts their earlier statement across rounds, detectives can formally challenge them to earn investigation bonus points.
-4. **High-Stakes Interrogation (Russian Roulette & Narrator's Gamble):**
-   To break tight-lipped suspects, detectives can initiate a high-stakes confrontation inspired by Russian Roulette (1-in-6 chance of backfiring vs. 5-in-6 chance of extracting critical letter clues), or guess the Narrator's secret number (1 to 4) for forensic alibi confirmations.
+4. **Evidence Logging & Dossier Analysis:**
+   Detectives maintain an evidence log tracking every vocal statement, cross-referencing alibis across rounds to build an undeniable case before calling a trial.
 5. **Classroom Trial & Expulsion Vote:**
    At the end of each round, detectives cast a collective vote to expose a suspect. Exposing the Proxy King triggers immediate victory. Wrongly accusing an innocent student incurs a disciplinary penalty.
 
@@ -68,16 +68,16 @@ This project strictly adheres to all core OOP principles mandated in the CSE 430
 
 | Member | Designated Role | Specific Class Deliverables |
 | :--- | :--- | :--- |
-| **Md. Shifat Reza** | Game Mechanics & Risk Systems | `GambleEngine.h/.cpp`, `GambleResult`, Point scoring algorithms |
+| **Md. Shifat Reza** | Contradiction Logic & Scoring Systems | `Suspect::hasContradiction()`, Scoring logic, Investigation flow |
 | **Abrar Faiyaz** | Character Domain & OOP Hierarchy | `Character.h/.cpp`, `Detective.h/.cpp`, `Suspect.h/.cpp` |
 | **Saraf** | Narrative, Dialogue & File I/O | `Personality.h/.cpp`, `Statement.h/.cpp`, `CaseFile.h/.cpp` |
-| **Ariyan** | Engine Orchestration & Exceptions | `GameEngine.h/.cpp`, `Exceptions.h/.cpp`, `main.cpp`, `Makefile` |
+| **Ariyan** | Engine Orchestration & Exceptions | `GameEngine.h/.cpp`, `Exceptions.h/.cpp`, `TerminalColor.h`, `main.cpp`, `Makefile` |
 
 ---
 
 ### 5. Project Roadmap (Week 4 to Week 15)
 * **Week 4:** Proposal submission & architecture approval.
 * **Week 6 - 8:** Baseline game loop and character classes unit integration.
-* **Week 9 - 11:** Polish contradiction detection, Russian Roulette probability balancing, and custom file I/O scenarios.
+* **Week 9 - 11:** Polish contradiction detection algorithms and custom file I/O scenarios.
 * **Week 12 - 14:** Edge case testing, input validation hardening, and documentation.
 * **Week 15:** Final presentation and interactive live demo.

@@ -102,14 +102,12 @@ void GameEngine::printMenu() const {
     std::cout << "+------------------------------------------------------------------+\n" << Color::RESET;
     std::cout << "  " << Color::BOLD_CYAN << "[1]" << Color::RESET << " Suspect re Jera koro              " << Color::DIM << "(Cost: 1 Action)\n" << Color::RESET;
     std::cout << "  " << Color::BOLD_CYAN << "[2]" << Color::RESET << " " << Color::BOLD_YELLOW << "Contradiction Dhoro / Batpar dhora!" << Color::RESET << " " << Color::DIM << "(Cost: 1 Action)\n" << Color::RESET;
-    std::cout << "  " << Color::BOLD_CYAN << "[3]" << Color::RESET << " " << Color::BOLD_MAGENTA << "High-Stakes Russian Roulette" << Color::RESET << "       " << Color::DIM << "(Risk-Reward Gamble)\n" << Color::RESET;
-    std::cout << "  " << Color::BOLD_CYAN << "[4]" << Color::RESET << " " << Color::MAGENTA << "Narrator er 1-4 Gamble" << Color::RESET << "             " << Color::DIM << "(Secret Clue er jonno)\n" << Color::RESET;
-    std::cout << "  " << Color::BOLD_CYAN << "[5]" << Color::RESET << " Evidence & Case Log Dekho\n";
-    std::cout << "  " << Color::BOLD_CYAN << "[6]" << Color::RESET << " Suspect Dossier Dekho\n";
-    std::cout << "  " << Color::BOLD_CYAN << "[7]" << Color::RESET << " " << Color::BOLD_RED << "Classroom Trial & Vote Dao" << Color::RESET << "         " << Color::DIM << "(Round Shesh korar Vote)\n" << Color::RESET;
-    std::cout << "  " << Color::BOLD_CYAN << "[8]" << Color::RESET << " " << Color::DIM << "Khela bondho kore Exit koro\n" << Color::RESET;
+    std::cout << "  " << Color::BOLD_CYAN << "[3]" << Color::RESET << " Evidence & Case Log Dekho\n";
+    std::cout << "  " << Color::BOLD_CYAN << "[4]" << Color::RESET << " Suspect Dossier Dekho\n";
+    std::cout << "  " << Color::BOLD_CYAN << "[5]" << Color::RESET << " " << Color::BOLD_RED << "Classroom Trial & Vote Dao" << Color::RESET << "         " << Color::DIM << "(Round Shesh korar Vote)\n" << Color::RESET;
+    std::cout << "  " << Color::BOLD_CYAN << "[6]" << Color::RESET << " " << Color::DIM << "Khela bondho kore Exit koro\n" << Color::RESET;
     std::cout << Color::BOLD_CYAN << "----------------------------------------------------------------------\n" << Color::RESET;
-    std::cout << Color::BOLD_WHITE << "Ekta option choose koro (1-8): " << Color::RESET;
+    std::cout << Color::BOLD_WHITE << "Ekta option choose koro (1-6): " << Color::RESET;
 }
 
 void GameEngine::handleInterrogate() {
@@ -225,76 +223,6 @@ void GameEngine::handleChallengeContradiction() {
     std::cout << "------------------------------------------------------\n";
 
     --m_actionsLeft;
-}
-
-void GameEngine::handleRussianRoulette() {
-    std::cout << "\n" << Color::BOLD_MAGENTA << "--- RUSSIAN ROULETTE / KILLER'S GAMBLE ---\n" << Color::RESET;
-    std::cout << "Select a suspect to corner with high-stakes interrogation:\n";
-    for (size_t i = 0; i < m_suspects.size(); ++i) {
-        if (!m_suspects[i].isExposed() && !m_suspects[i].isSilenced()) {
-            std::cout << "  [" << (i + 1) << "] " << m_suspects[i].getName() << "\n";
-        }
-    }
-    std::cout << "Choose (1-" << m_suspects.size() << ") or 0 to cancel: ";
-
-    int choice;
-    if (!(std::cin >> choice) || choice < 0 || choice > static_cast<int>(m_suspects.size())) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        throw InvalidInputException("Invalid suspect index for Russian Roulette.");
-    }
-    if (choice == 0) return;
-
-    size_t sIdx = choice - 1;
-    bool isGuilty = (m_suspects[sIdx].getRole() != RoleType::HONEST_STUDENT);
-
-    GambleResult gr = m_gambleEngine.playRussianRoulette(m_suspects[sIdx].getName(), isGuilty, m_proxyKingName);
-
-    std::cout << "\n" << gr.message << "\n";
-    if (gr.pointsDelta > 0) {
-        addTeamScore(gr.pointsDelta);
-    } else {
-        deductTeamScore(-gr.pointsDelta);
-        m_suspects[sIdx].setSilenced(true);
-    }
-
-    if (!gr.revealedClue.empty()) {
-        m_evidenceLog.push_back("[CLUE] " + gr.revealedClue);
-    }
-}
-
-void GameEngine::handleNarratorGamble() {
-    std::cout << "\n" << Color::BOLD_CYAN << "--- THE NARRATOR'S 1-4 GAMBLE ---\n" << Color::RESET;
-    std::cout << "The Narrator offers a gamble: Guess a number between 1 and 4.\n";
-    std::cout << "Enter your guess (1-4): ";
-
-    int guess;
-    if (!(std::cin >> guess) || guess < 1 || guess > 4) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        throw InvalidInputException("Guess must be between 1 and 4.");
-    }
-
-    std::string innocentName = "Unknown";
-    for (const auto& s : m_suspects) {
-        if (s.getRole() == RoleType::HONEST_STUDENT) {
-            innocentName = s.getName();
-            break;
-        }
-    }
-
-    GambleResult gr = m_gambleEngine.playNarratorGamble(guess, m_proxyKingName, innocentName);
-    std::cout << "\n" << gr.message << "\n";
-
-    if (gr.pointsDelta > 0) {
-        addTeamScore(gr.pointsDelta);
-    } else {
-        deductTeamScore(-gr.pointsDelta);
-    }
-
-    if (!gr.revealedClue.empty()) {
-        m_evidenceLog.push_back("[NARRATOR CLUE] " + gr.revealedClue);
-    }
 }
 
 void GameEngine::handleReviewLog() const {
@@ -458,7 +386,7 @@ void GameEngine::startGame() {
             }
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "\n" << Color::BOLD_RED << "⚠️ Invalid choice. Please enter a number between 1 and 8.\n" << Color::RESET;
+            std::cout << "\n" << Color::BOLD_RED << "⚠️ Invalid choice. Please enter a number between 1 and 6.\n" << Color::RESET;
             continue;
         }
 
@@ -466,17 +394,15 @@ void GameEngine::startGame() {
             switch (opt) {
                 case 1: handleInterrogate(); break;
                 case 2: handleChallengeContradiction(); break;
-                case 3: handleRussianRoulette(); break;
-                case 4: handleNarratorGamble(); break;
-                case 5: handleReviewLog(); break;
-                case 6: handleDossier(); break;
-                case 7: handleClassVote(); break;
-                case 8:
+                case 3: handleReviewLog(); break;
+                case 4: handleDossier(); break;
+                case 5: handleClassVote(); break;
+                case 6:
                     std::cout << "\nExiting investigation. Goodbye!\n";
                     m_isGameOver = true;
                     break;
                 default:
-                    throw InvalidInputException("Selection must be between 1 and 8.");
+                    throw InvalidInputException("Selection must be between 1 and 6.");
             }
         } catch (const ProxyGameException& pge) {
             std::cout << "\n" << Color::BOLD_RED << pge.what() << Color::RESET << "\n";
