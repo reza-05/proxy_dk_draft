@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include "CaseFile.h"
 #include "Exceptions.h"
+#include "TerminalColor.h"
 #include <iostream>
 #include <iomanip>
 #include <limits>
@@ -18,21 +19,21 @@ GameEngine::GameEngine(std::string configPath, std::string archivePath)
 
 void GameEngine::printBanner() const {
     std::cout << "\n";
+    std::cout << Color::BOLD_CYAN << "+------------------------------------------------------------------+\n";
+    std::cout << "|                                                                  |\n";
+    std::cout << "|       " << Color::BOLD_YELLOW << "██████╗ ██████╗  ██████╗ ██╗  ██╗██╗   ██╗" << Color::BOLD_CYAN << "                 |\n";
+    std::cout << "|       " << Color::BOLD_YELLOW << "██╔══██╗██╔══██╗██╔═══██╗╚██╗██╔╝╚██╗ ██╔╝" << Color::BOLD_CYAN << "                 |\n";
+    std::cout << "|       " << Color::BOLD_YELLOW << "██████╔╝██████╔╝██║   ██║ ╚███╔╝  ╚████╔╝ " << Color::BOLD_CYAN << "                 |\n";
+    std::cout << "|       " << Color::BOLD_YELLOW << "██╔═══╝ ██╔══██╗██║   ██║ ██╔██╗   ╚██╔╝  " << Color::BOLD_CYAN << "                 |\n";
+    std::cout << "|       " << Color::BOLD_YELLOW << "██║     ██║  ██║╚██████╔╝██╔╝ ██╗   ██║   " << Color::BOLD_CYAN << "                 |\n";
+    std::cout << "|       " << Color::BOLD_YELLOW << "╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   " << Color::BOLD_CYAN << "                 |\n";
+    std::cout << "|                                                                  |\n";
+    std::cout << "|             " << Color::BOLD_WHITE << "D I L O   K E ?   (Room 302 Mystery)" << Color::BOLD_CYAN << "                 |\n";
+    std::cout << "|                                                                  |\n";
     std::cout << "+------------------------------------------------------------------+\n";
-    std::cout << "|                                                                  |\n";
-    std::cout << "|       ██████╗ ██████╗  ██████╗ ██╗  ██╗██╗   ██╗                 |\n";
-    std::cout << "|       ██╔══██╗██╔══██╗██╔═══██╗╚██╗██╔╝╚██╗ ██╔╝                 |\n";
-    std::cout << "|       ██████╔╝██████╔╝██║   ██║ ╚███╔╝  ╚████╔╝                  |\n";
-    std::cout << "|       ██╔═══╝ ██╔══██╗██║   ██║ ██╔██╗   ╚██╔╝                   |\n";
-    std::cout << "|       ██║     ██║  ██║╚██████╔╝██╔╝ ██╗   ██║                    |\n";
-    std::cout << "|       ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝                    |\n";
-    std::cout << "|                                                                  |\n";
-    std::cout << "|                D I L O   K E ?   (Room 302 Mystery)              |\n";
-    std::cout << "|                                                                  |\n";
-    std::cout << "+------------------------------------------------------------------+\n";
-    std::cout << "|      IUT Attendance Syndicate: 45 Signatures, 40 Students!       |\n";
-    std::cout << "|    4 Detectives. A Room Full of Suspects. Catch the King!        |\n";
-    std::cout << "+------------------------------------------------------------------+\n\n";
+    std::cout << "|      " << Color::YELLOW << "IUT Attendance Syndicate: 45 Signatures, 40 Students!" << Color::BOLD_CYAN << "       |\n";
+    std::cout << "|    " << Color::WHITE << "4 Detectives. A Room Full of Suspects. Catch the King!" << Color::BOLD_CYAN << "        |\n";
+    std::cout << "+------------------------------------------------------------------+\n" << Color::RESET << "\n";
 }
 
 int GameEngine::getTeamScore() const {
@@ -62,7 +63,7 @@ void GameEngine::deductTeamScore(int points) {
 
 void GameEngine::setupDetectives() {
     printBanner();
-    std::cout << "Enter number of student detectives (1 to 4) [Default: 4]: ";
+    std::cout << Color::BOLD_WHITE << "Enter number of student detectives (1 to 4) [Default: 4]: " << Color::RESET;
     std::string input;
     std::getline(std::cin, input);
 
@@ -78,7 +79,7 @@ void GameEngine::setupDetectives() {
 
     std::vector<std::string> defaultNames = {"Shifat (Lead Detective)", "Abrar", "Saraf", "Ariyan"};
     for (int i = 0; i < count; ++i) {
-        std::cout << "Enter Detective #" << (i + 1) << " Name [Default: " << defaultNames[i] << "]: ";
+        std::cout << "Enter Detective #" << (i + 1) << " Name [Default: " << Color::CYAN << defaultNames[i] << Color::RESET << "]: ";
         std::string name;
         std::getline(std::cin, name);
         if (name.empty()) {
@@ -88,41 +89,44 @@ void GameEngine::setupDetectives() {
         m_detectives.emplace_back(name, id);
     }
 
-    std::cout << "\n✅ Detective Squad Registered! The teacher hands you the attendance binder.\n";
+    std::cout << "\n" << Color::BOLD_GREEN << "✅ Detective Squad Registered! The teacher hands you the attendance binder." << Color::RESET << "\n";
 }
 
 void GameEngine::printMenu() const {
-    std::cout << "\n----------------------------------------------------------------------\n";
-    std::cout << " ROUND " << m_currentRound << "/" << MAX_ROUNDS
-              << " | Actions Baki: " << m_actionsLeft << "/" << ACTIONS_PER_ROUND
-              << " | Squad Score: " << getTeamScore() << " pts\n";
-    std::cout << "----------------------------------------------------------------------\n";
-    std::cout << "  [1] Suspect re Jera koro              (Cost: 1 Action)\n";
-    std::cout << "  [2] Contradiction Dhoro / Batpar dhora! (Cost: 1 Action)\n";
-    std::cout << "  [3] High-Stakes Russian Roulette       (Risk-Reward Gamble)\n";
-    std::cout << "  [4] Narrator er 1-4 Gamble             (Secret Clue er jonno)\n";
-    std::cout << "  [5] Evidence & Case Log Dekho\n";
-    std::cout << "  [6] Suspect Dossier Dekho\n";
-    std::cout << "  [7] Classroom Trial & Vote Dao         (Round Shesh korar Vote)\n";
-    std::cout << "  [8] Khela bondho kore Exit koro\n";
-    std::cout << "----------------------------------------------------------------------\n";
-    std::cout << "Ekta option choose koro (1-8): ";
+    std::cout << "\n" << Color::BOLD_CYAN << "+------------------------------------------------------------------+\n";
+    std::cout << "| " << Color::BOLD_WHITE << "ROUND " << m_currentRound << "/" << MAX_ROUNDS << Color::RESET
+              << Color::BOLD_CYAN << "  |  Actions Baki: " << (m_actionsLeft > 0 ? Color::BOLD_GREEN : Color::BOLD_RED)
+              << m_actionsLeft << "/" << ACTIONS_PER_ROUND << Color::RESET
+              << Color::BOLD_CYAN << "  |  Squad Score: " << Color::BOLD_YELLOW << getTeamScore() << " pts" << Color::RESET
+              << Color::BOLD_CYAN << "             |\n";
+    std::cout << "+------------------------------------------------------------------+\n" << Color::RESET;
+    std::cout << "  " << Color::BOLD_CYAN << "[1]" << Color::RESET << " Suspect re Jera koro              " << Color::DIM << "(Cost: 1 Action)\n" << Color::RESET;
+    std::cout << "  " << Color::BOLD_CYAN << "[2]" << Color::RESET << " " << Color::BOLD_YELLOW << "Contradiction Dhoro / Batpar dhora!" << Color::RESET << " " << Color::DIM << "(Cost: 1 Action)\n" << Color::RESET;
+    std::cout << "  " << Color::BOLD_CYAN << "[3]" << Color::RESET << " " << Color::BOLD_MAGENTA << "High-Stakes Russian Roulette" << Color::RESET << "       " << Color::DIM << "(Risk-Reward Gamble)\n" << Color::RESET;
+    std::cout << "  " << Color::BOLD_CYAN << "[4]" << Color::RESET << " " << Color::MAGENTA << "Narrator er 1-4 Gamble" << Color::RESET << "             " << Color::DIM << "(Secret Clue er jonno)\n" << Color::RESET;
+    std::cout << "  " << Color::BOLD_CYAN << "[5]" << Color::RESET << " Evidence & Case Log Dekho\n";
+    std::cout << "  " << Color::BOLD_CYAN << "[6]" << Color::RESET << " Suspect Dossier Dekho\n";
+    std::cout << "  " << Color::BOLD_CYAN << "[7]" << Color::RESET << " " << Color::BOLD_RED << "Classroom Trial & Vote Dao" << Color::RESET << "         " << Color::DIM << "(Round Shesh korar Vote)\n" << Color::RESET;
+    std::cout << "  " << Color::BOLD_CYAN << "[8]" << Color::RESET << " " << Color::DIM << "Khela bondho kore Exit koro\n" << Color::RESET;
+    std::cout << Color::BOLD_CYAN << "----------------------------------------------------------------------\n" << Color::RESET;
+    std::cout << Color::BOLD_WHITE << "Ekta option choose koro (1-8): " << Color::RESET;
 }
 
 void GameEngine::handleInterrogate() {
     if (m_actionsLeft <= 0) {
-        std::cout << "\n⚠️ Ei round er shob action sesh! Please Classroom Trial & Vote [7] dao.\n";
+        std::cout << "\n" << Color::BOLD_RED << "⚠️ Ei round er shob action sesh! Please Classroom Trial & Vote [7] dao.\n" << Color::RESET;
         return;
     }
 
-    std::cout << "\n--- CHOOSE A SUSPECT TO QUESTION ---\n";
+    std::cout << "\n" << Color::BOLD_CYAN << "--- CHOOSE A SUSPECT TO QUESTION ---\n" << Color::RESET;
     for (size_t i = 0; i < m_suspects.size(); ++i) {
-        std::cout << "  [" << (i + 1) << "] " << m_suspects[i].getName()
+        std::cout << "  " << Color::CYAN << "[" << (i + 1) << "]" << Color::RESET << " "
+                  << Color::BOLD_WHITE << m_suspects[i].getName() << Color::RESET
                   << " (" << archetypeToString(m_suspects[i].getArchetype()) << ")";
         if (m_suspects[i].isExposed()) {
-            std::cout << " [EXPOSED]";
+            std::cout << " " << Color::BOLD_RED << "[EXPOSED]" << Color::RESET;
         } else if (m_suspects[i].isSilenced()) {
-            std::cout << " [SILENCED]";
+            std::cout << " " << Color::BOLD_MAGENTA << "[SILENCED]" << Color::RESET;
         }
         std::cout << "\n";
     }
@@ -145,7 +149,7 @@ void GameEngine::handleInterrogate() {
         throw SuspectUnavailableException(m_suspects[sIdx].getName() + " voy peye gese, kotha bolbe na!");
     }
 
-    std::cout << "\n--- JIGESHBADER TOPIC SELECT KORO ---\n";
+    std::cout << "\n" << Color::BOLD_CYAN << "--- JIGESHBADER TOPIC SELECT KORO ---\n" << Color::RESET;
     std::cout << "  [1] Roll call er shomoy tumi koi chila?\n";
     std::cout << "  [2] Podium ba sir er desk er kache kaoke suspicious dekhso?\n";
     std::cout << "  [3] Lecture er shomoy tomar alibi ke confirm korbe?\n";
@@ -164,10 +168,12 @@ void GameEngine::handleInterrogate() {
 
     Statement stmt = m_suspects[sIdx].interrogate(topic, m_currentRound, m_proxyKingName, witnessName);
 
-    std::cout << "\n======================================================\n";
-    std::cout << " 🗣️  " << m_suspects[sIdx].getName() << " answers:\n";
-    std::cout << " \"" << stmt.getDialogue() << "\"\n";
-    std::cout << "======================================================\n";
+    std::cout << "\n" << Color::BOLD_CYAN << "+------------------------------------------------------------------+\n";
+    std::cout << "| 🗣️  " << Color::BOLD_WHITE << m_suspects[sIdx].getName() << Color::DIM << " ("
+              << archetypeToString(m_suspects[sIdx].getArchetype()) << ") bollo:\n" << Color::RESET;
+    std::cout << Color::BOLD_CYAN << "+------------------------------------------------------------------+\n";
+    std::cout << Color::BOLD_YELLOW << "  \"" << stmt.getDialogue() << "\"\n" << Color::RESET;
+    std::cout << Color::BOLD_CYAN << "+------------------------------------------------------------------+\n" << Color::RESET;
 
     std::ostringstream logEntry;
     logEntry << "[R" << m_currentRound << "] " << m_suspects[sIdx].getName() << ": \""
@@ -179,13 +185,13 @@ void GameEngine::handleInterrogate() {
 
 void GameEngine::handleChallengeContradiction() {
     if (m_actionsLeft <= 0) {
-        std::cout << "\n⚠️ No actions left this round! Please vote to conclude the round.\n";
+        std::cout << "\n" << Color::BOLD_RED << "⚠️ No actions left this round! Please vote to conclude the round.\n" << Color::RESET;
         return;
     }
 
-    std::cout << "\n--- ACCUSE A SUSPECT OF CONTRADICTION ---\n";
+    std::cout << "\n" << Color::BOLD_CYAN << "--- ACCUSE A SUSPECT OF CONTRADICTION ---\n" << Color::RESET;
     for (size_t i = 0; i < m_suspects.size(); ++i) {
-        std::cout << "  [" << (i + 1) << "] " << m_suspects[i].getName()
+        std::cout << "  [" << (i + 1) << "] " << Color::BOLD_WHITE << m_suspects[i].getName() << Color::RESET
                   << " (" << m_suspects[i].getHistory().size() << " statements recorded)\n";
     }
     std::cout << "Select suspect to challenge (1-" << m_suspects.size() << ") or 0 to cancel: ";
@@ -206,14 +212,14 @@ void GameEngine::handleChallengeContradiction() {
     std::cout << "  INVESTIGATION CHALLENGE: " << m_suspects[sIdx].getName() << "\n";
     std::cout << "------------------------------------------------------\n";
     if (caught) {
-        std::cout << "🎉 DHOMA-DHAM DHORA KHAISI! Contradiction dhora porse!\n";
+        std::cout << Color::BOLD_GREEN << "🎉 DHOMA-DHAM DHORA KHAISI! Contradiction dhora porse!\n";
         std::cout << "Details: " << details << "\n";
-        std::cout << "(+3 Investigation Points squad er score e jog hoise!)\n";
+        std::cout << "(+3 Investigation Points squad er score e jog hoise!)\n" << Color::RESET;
         addTeamScore(3);
     } else {
-        std::cout << "❌ Kono contradiction paowa jay nai!\n";
+        std::cout << Color::BOLD_RED << "❌ Kono contradiction paowa jay nai!\n";
         std::cout << details << "\n";
-        std::cout << "Suspect er kotha thik ache. (-1 Point bina karone challenge korar jonno)\n";
+        std::cout << "Suspect er kotha thik ache. (-1 Point bina karone challenge korar jonno)\n" << Color::RESET;
         deductTeamScore(1);
     }
     std::cout << "------------------------------------------------------\n";
@@ -222,7 +228,7 @@ void GameEngine::handleChallengeContradiction() {
 }
 
 void GameEngine::handleRussianRoulette() {
-    std::cout << "\n--- RUSSIAN ROULETTE / KILLER'S GAMBLE ---\n";
+    std::cout << "\n" << Color::BOLD_MAGENTA << "--- RUSSIAN ROULETTE / KILLER'S GAMBLE ---\n" << Color::RESET;
     std::cout << "Select a suspect to corner with high-stakes interrogation:\n";
     for (size_t i = 0; i < m_suspects.size(); ++i) {
         if (!m_suspects[i].isExposed() && !m_suspects[i].isSilenced()) {
@@ -258,7 +264,7 @@ void GameEngine::handleRussianRoulette() {
 }
 
 void GameEngine::handleNarratorGamble() {
-    std::cout << "\n--- THE NARRATOR'S 1-4 GAMBLE ---\n";
+    std::cout << "\n" << Color::BOLD_CYAN << "--- THE NARRATOR'S 1-4 GAMBLE ---\n" << Color::RESET;
     std::cout << "The Narrator offers a gamble: Guess a number between 1 and 4.\n";
     std::cout << "Enter your guess (1-4): ";
 
@@ -292,40 +298,41 @@ void GameEngine::handleNarratorGamble() {
 }
 
 void GameEngine::handleReviewLog() const {
-    std::cout << "\n======================================================\n";
+    std::cout << "\n" << Color::BOLD_CYAN << "======================================================\n";
     std::cout << "                 CASE EVIDENCE LOG                     \n";
-    std::cout << "======================================================\n";
+    std::cout << "======================================================\n" << Color::RESET;
     if (m_evidenceLog.empty()) {
-        std::cout << "No statements or clues recorded yet. Go interrogate someone!\n";
+        std::cout << Color::DIM << "No statements or clues recorded yet. Go interrogate someone!\n" << Color::RESET;
     } else {
         for (size_t i = 0; i < m_evidenceLog.size(); ++i) {
-            std::cout << " [" << (i + 1) << "] " << m_evidenceLog[i] << "\n";
+            std::cout << " " << Color::CYAN << "[" << (i + 1) << "]" << Color::RESET << " "
+                      << Color::WHITE << m_evidenceLog[i] << Color::RESET << "\n";
         }
     }
-    std::cout << "======================================================\n";
+    std::cout << Color::BOLD_CYAN << "======================================================\n" << Color::RESET;
 }
 
 void GameEngine::handleDossier() const {
-    std::cout << "\n======================================================\n";
+    std::cout << "\n" << Color::BOLD_CYAN << "======================================================\n";
     std::cout << "               CLASS SUSPECT DOSSIER                   \n";
-    std::cout << "======================================================\n";
+    std::cout << "======================================================\n" << Color::RESET;
     for (const auto& s : m_suspects) {
         s.displayProfile();
-        std::cout << "------------------------------------------------------\n";
+        std::cout << Color::DIM << "------------------------------------------------------\n" << Color::RESET;
     }
 }
 
 void GameEngine::handleClassVote() {
-    std::cout << "\n======================================================\n";
+    std::cout << "\n" << Color::BOLD_RED << "======================================================\n";
     std::cout << "          CLASSROOM TRIAL & EXPULSION VOTE            \n";
-    std::cout << "======================================================\n";
-    std::cout << "The Squad must now vote on a suspect to officially accuse!\n";
+    std::cout << "======================================================\n" << Color::RESET;
+    std::cout << Color::BOLD_WHITE << "The Squad must now vote on a suspect to officially accuse!\n" << Color::RESET;
 
     for (size_t i = 0; i < m_suspects.size(); ++i) {
-        std::cout << "  [" << (i + 1) << "] " << m_suspects[i].getName()
+        std::cout << "  [" << (i + 1) << "] " << Color::BOLD_WHITE << m_suspects[i].getName() << Color::RESET
                   << " (" << archetypeToString(m_suspects[i].getArchetype()) << ")";
         if (m_suspects[i].isExposed()) {
-            std::cout << " [ALREADY EXPOSED]";
+            std::cout << " " << Color::BOLD_RED << "[ALREADY EXPOSED]" << Color::RESET;
         }
         std::cout << "\n";
     }
@@ -340,32 +347,32 @@ void GameEngine::handleClassVote() {
 
     size_t sIdx = choice - 1;
     if (m_suspects[sIdx].isExposed()) {
-        std::cout << "⚠️ That student has already been revealed! Vote cancelled.\n";
+        std::cout << Color::YELLOW << "⚠️ That student has already been revealed! Vote cancelled.\n" << Color::RESET;
         return;
     }
 
-    std::cout << "\n💥 Teacher bolen: \"" << m_suspects[sIdx].getName()
-              << ", shamne eshe nijer student ID khata dekhaw!\"\n";
+    std::cout << "\n" << Color::BOLD_WHITE << "💥 Teacher bolen: \"" << m_suspects[sIdx].getName()
+              << ", shamne eshe nijer student ID khata dekhaw!\"\n" << Color::RESET;
     m_suspects[sIdx].exposeRole();
     RoleType role = m_suspects[sIdx].getRole();
 
     if (role == RoleType::PROXY_KING) {
-        std::cout << "\n🏆 BINGO! KHELA KHOTOM! 👑\n";
+        std::cout << "\n" << Color::BOLD_YELLOW << "🏆 BINGO! KHELA KHOTOM! 👑\n";
         std::cout << "👑 " << m_suspects[sIdx].getName() << " E ASHELE PROXY KING!\n";
         std::cout << "Bag er bhitor theke aro 5 ta fake attendance card paowa gese!\n";
-        std::cout << "(+10 Investigation Points squad er score e jog hoise!)\n";
+        std::cout << "(+10 Investigation Points squad er score e jog hoise!)\n" << Color::RESET;
         addTeamScore(10);
         m_detectivesWon = true;
         m_isGameOver = true;
     } else if (role == RoleType::PROXY_MEMBER) {
-        std::cout << "\n🎯 TARGET HIT! " << m_suspects[sIdx].getName() << " PROXY GANG ER OPERATIVE!\n";
+        std::cout << "\n" << Color::BOLD_GREEN << "🎯 TARGET HIT! " << m_suspects[sIdx].getName() << " PROXY GANG ER OPERATIVE!\n";
         std::cout << "O onner proxy ditsilo, but ashol Mastermind ekhono dhora pore nai!\n";
-        std::cout << "(+5 Investigation Points squad er score e jog hoise!)\n";
+        std::cout << "(+5 Investigation Points squad er score e jog hoise!)\n" << Color::RESET;
         addTeamScore(5);
     } else {
-        std::cout << "\n❌ SERIOUS VUL! " << m_suspects[sIdx].getName() << " EKDOM INNOCENT CHILO!\n";
+        std::cout << "\n" << Color::BOLD_RED << "❌ SERIOUS VUL! " << m_suspects[sIdx].getName() << " EKDOM INNOCENT CHILO!\n";
         std::cout << "\"Bhai amar attendance 95%, amar upore doubt korlen?!\"\n";
-        std::cout << "(-3 Points penalty vul allegation dewar jonno!)\n";
+        std::cout << "(-3 Points penalty vul allegation dewar jonno!)\n" << Color::RESET;
         deductTeamScore(3);
     }
 
@@ -387,30 +394,30 @@ void GameEngine::endRound() {
         m_isGameOver = true;
         m_detectivesWon = false;
     } else {
-        std::cout << "\n🔔 The bell rings! Entering Round " << m_currentRound << " of " << MAX_ROUNDS << "!\n";
+        std::cout << "\n" << Color::BOLD_CYAN << "🔔 The bell rings! Entering Round " << m_currentRound << " of " << MAX_ROUNDS << "!\n" << Color::RESET;
     }
 }
 
 void GameEngine::checkGameConditions() {
-    std::cout << "\n======================================================\n";
+    std::cout << "\n" << Color::BOLD_CYAN << "======================================================\n";
     std::cout << "                 CASE CLOSED SUMMARY                  \n";
-    std::cout << "======================================================\n";
+    std::cout << "======================================================\n" << Color::RESET;
 
     if (m_detectivesWon) {
-        std::cout << "🎉 VICTORY! Student Investigation Squad jitse!\n";
-        std::cout << "IUT Room 302 er Proxy Syndicate pura bhenge dewa hoise!\n";
+        std::cout << Color::BOLD_GREEN << "🎉 VICTORY! Student Investigation Squad jitse!\n";
+        std::cout << "IUT Room 302 er Proxy Syndicate pura bhenge dewa hoise!\n" << Color::RESET;
     } else {
-        std::cout << "💀 DEFEAT! Shomoy shesh hoye gese!\n";
+        std::cout << Color::BOLD_RED << "💀 DEFEAT! Shomoy shesh hoye gese!\n";
         std::cout << "Ashol Proxy King chilo: [" << m_proxyKingName << "]!\n";
-        std::cout << "O 100% proxy attendance niye pass kore ber hoye gelo!\n";
+        std::cout << "O 100% proxy attendance niye pass kore ber hoye gelo!\n" << Color::RESET;
     }
 
-    std::cout << "\nFINAL TEAM SCORE: " << getTeamScore() << " POINTS\n";
+    std::cout << "\n" << Color::BOLD_YELLOW << "FINAL TEAM SCORE: " << getTeamScore() << " POINTS\n" << Color::RESET;
     std::cout << "DETECTIVE ROSTER:\n";
     for (const auto& det : m_detectives) {
         det.displayProfile();
     }
-    std::cout << "======================================================\n";
+    std::cout << Color::BOLD_CYAN << "======================================================\n" << Color::RESET;
 
     // Save archive file
     std::ostringstream archiveReport;
@@ -423,7 +430,7 @@ void GameEngine::checkGameConditions() {
         archiveReport << d.getName() << " (" << d.getScore() << " pts), ";
     }
     CaseFile::saveCaseArchive(m_archivePath, archiveReport.str());
-    std::cout << "📁 Case record archived successfully to: " << m_archivePath << "\n";
+    std::cout << Color::DIM << "📁 Case record archived successfully to: " << m_archivePath << Color::RESET << "\n";
 }
 
 void GameEngine::startGame() {
@@ -436,10 +443,10 @@ void GameEngine::startGame() {
 
     setupDetectives();
 
-    std::cout << "\n📢 INCIDENT REPORT (WEEK 2, SHOKAL 8:00 AM, ROOM 302):\n";
-    std::cout << "Sir dekhlen 40 jon enrolled student er jaygay sheet e 45 ta sign pore gese!\n";
+    std::cout << "\n" << Color::BOLD_YELLOW << "📢 INCIDENT REPORT (WEEK 2, SHOKAL 8:00 AM, ROOM 302):\n" << Color::RESET;
+    std::cout << Color::WHITE << "Sir dekhlen 40 jon enrolled student er jaygay sheet e 45 ta sign pore gese!\n";
     std::cout << "Class er keu na keu hall e ghumano friend er jonno 5 ta fake proxy maira dise!\n";
-    std::cout << "Round 4 shesh howar agei Proxy King re dhoro!\n";
+    std::cout << "Round 4 shesh howar agei Proxy King re dhoro!\n" << Color::RESET;
 
     while (!m_isGameOver) {
         printMenu();
@@ -451,7 +458,7 @@ void GameEngine::startGame() {
             }
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "\n⚠️ Invalid choice. Please enter a number between 1 and 8.\n";
+            std::cout << "\n" << Color::BOLD_RED << "⚠️ Invalid choice. Please enter a number between 1 and 8.\n" << Color::RESET;
             continue;
         }
 
@@ -472,9 +479,9 @@ void GameEngine::startGame() {
                     throw InvalidInputException("Selection must be between 1 and 8.");
             }
         } catch (const ProxyGameException& pge) {
-            std::cout << "\n" << pge.what() << "\n";
+            std::cout << "\n" << Color::BOLD_RED << pge.what() << Color::RESET << "\n";
         } catch (const std::exception& ex) {
-            std::cout << "\n[Standard Error] " << ex.what() << "\n";
+            std::cout << "\n" << Color::BOLD_RED << "[Standard Error] " << ex.what() << Color::RESET << "\n";
         }
     }
 

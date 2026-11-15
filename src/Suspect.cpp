@@ -1,5 +1,6 @@
 #include "Suspect.h"
 #include "Personality.h"
+#include "TerminalColor.h"
 #include <sstream>
 
 namespace ProxyMystery {
@@ -102,10 +103,12 @@ const std::string& Suspect::getTrueLocation() const {
 }
 
 void Suspect::displayProfile() const {
-    std::cout << "[Suspect] " << m_name << " (" << archetypeToString(m_archetype) << ")\n"
-              << "   ID: " << m_id << "\n"
-              << "   Status: " << (m_isExposed ? "EXPOSED as " + roleToString(m_role) : "Under Investigation") << "\n"
-              << "   Statements on record: " << m_history.size() << "\n";
+    std::cout << Color::BOLD_CYAN << "👤 [Suspect] " << Color::BOLD_WHITE << m_name
+              << " " << Color::DIM << "(" << archetypeToString(m_archetype) << ")" << Color::RESET << "\n"
+              << "   ID: " << Color::WHITE << m_id << Color::RESET << " | Status: "
+              << (m_isExposed ? Color::BOLD_RED + "[EXPOSED: " + roleToString(m_role) + "]"
+                              : Color::BOLD_YELLOW + "[Under Investigation]") << Color::RESET << "\n"
+              << "   Statements on record: " << Color::CYAN << m_history.size() << Color::RESET << "\n";
 }
 
 std::string Suspect::getRoleDescription() const {

@@ -1,4 +1,5 @@
 #include "Detective.h"
+#include "TerminalColor.h"
 
 namespace ProxyMystery {
 
@@ -21,8 +22,9 @@ int Detective::getScore() const {
 }
 
 void Detective::displayProfile() const {
-    std::cout << "[Detective] " << m_name << " (ID: " << m_id << ") | Investigation Points: "
-              << m_score << "\n";
+    std::cout << Color::BOLD_CYAN << "🕵️  [Detective] " << Color::BOLD_WHITE << m_name
+              << Color::DIM << " (" << m_id << ")" << Color::RESET
+              << " | Score: " << Color::BOLD_YELLOW << m_score << " pts" << Color::RESET << "\n";
 }
 
 std::string Detective::getRoleDescription() const {
