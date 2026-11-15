@@ -5,6 +5,7 @@
 #include <random>
 #include <algorithm>
 #include <iostream>
+#include <chrono>
 
 namespace ProxyMystery {
 
@@ -76,9 +77,10 @@ void CaseFile::loadSuspectsFromFile(const std::string& filePath,
         throw ProxyGameException("No suspects loaded from " + filePath);
     }
 
-    // Shuffle and assign hidden roles
-    std::random_device rd;
-    std::mt19937 g(rd());
+    // Shuffle and assign hidden roles dynamically using high-entropy seed
+    unsigned int seed = std::random_device{}() ^ 
+        static_cast<unsigned int>(std::chrono::high_resolution_clock::now().time_since_epoch().count());
+    std::mt19937 g(seed);
     std::vector<size_t> indices(rawList.size());
     for (size_t i = 0; i < indices.size(); ++i) {
         indices[i] = i;
