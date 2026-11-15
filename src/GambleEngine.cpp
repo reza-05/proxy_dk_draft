@@ -51,7 +51,7 @@ GambleResult GambleEngine::playRussianRoulette(const std::string& suspectName, b
             result.revealedClue = "Letter hint: Naam e ache '" + std::string(1, hintChar) + "'";
         } else {
             result.message = Color::BOLD_GREEN + "⚡ [CLICK!] Bacha gelo! " + suspectName + " kende kende bollo:\n"
-                             "\"Bhai GPA er koshom, ami nirdosh! Ami dekhsilam " + proxyKingName + " sheet er kache ghurgur kortesilo!\"\n"
+                             "\"Bhai GPA er koshom, ami nirdosh! Ami dekhsilam " + proxyKingName + " gala change kore fake roll call ditsilo!\"\n"
                              "(+8 Investigation Points squad er score e jog hoise!)" + Color::RESET;
             result.revealedClue = "Tip: Suspect " + proxyKingName + " re check koro";
         }

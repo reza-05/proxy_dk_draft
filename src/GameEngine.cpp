@@ -31,7 +31,7 @@ void GameEngine::printBanner() const {
     std::cout << "|             " << Color::BOLD_WHITE << "D I L O   K E ?   (Room 302 Mystery)" << Color::BOLD_CYAN << "                 |\n";
     std::cout << "|                                                                  |\n";
     std::cout << "+------------------------------------------------------------------+\n";
-    std::cout << "|      " << Color::YELLOW << "IUT Attendance Syndicate: 45 Signatures, 40 Students!" << Color::BOLD_CYAN << "       |\n";
+    std::cout << "|      " << Color::YELLOW << "IUT Attendance Mystery: 45 Responses, 40 Students!" << Color::BOLD_CYAN << "          |\n";
     std::cout << "|    " << Color::WHITE << "4 Detectives. A Room Full of Suspects. Catch the King!" << Color::BOLD_CYAN << "        |\n";
     std::cout << "+------------------------------------------------------------------+\n" << Color::RESET << "\n";
 }
@@ -89,7 +89,7 @@ void GameEngine::setupDetectives() {
         m_detectives.emplace_back(name, id);
     }
 
-    std::cout << "\n" << Color::BOLD_GREEN << "✅ Detective Squad Registered! The teacher hands you the attendance binder." << Color::RESET << "\n";
+    std::cout << "\n" << Color::BOLD_GREEN << "✅ Detective Squad Registered! Sir bolen: 'Proxy dhora na pora porjonto shobai 302 tei thakbe!'" << Color::RESET << "\n";
 }
 
 void GameEngine::printMenu() const {
@@ -151,7 +151,7 @@ void GameEngine::handleInterrogate() {
 
     std::cout << "\n" << Color::BOLD_CYAN << "--- JIGESHBADER TOPIC SELECT KORO ---\n" << Color::RESET;
     std::cout << "  [1] Roll call er shomoy tumi koi chila?\n";
-    std::cout << "  [2] Podium ba sir er desk er kache kaoke suspicious dekhso?\n";
+    std::cout << "  [2] Roll call e kaoke gala change kore fake response dite dekhso/shunso?\n";
     std::cout << "  [3] Lecture er shomoy tomar alibi ke confirm korbe?\n";
     std::cout << "Topic select koro (1-3): ";
 
@@ -352,26 +352,26 @@ void GameEngine::handleClassVote() {
     }
 
     std::cout << "\n" << Color::BOLD_WHITE << "💥 Teacher bolen: \"" << m_suspects[sIdx].getName()
-              << ", shamne eshe nijer student ID khata dekhaw!\"\n" << Color::RESET;
+              << ", shamne eshe nijer phone unlock koro!\"\n" << Color::RESET;
     m_suspects[sIdx].exposeRole();
     RoleType role = m_suspects[sIdx].getRole();
 
     if (role == RoleType::PROXY_KING) {
         std::cout << "\n" << Color::BOLD_YELLOW << "🏆 BINGO! KHELA KHOTOM! 👑\n";
         std::cout << "👑 " << m_suspects[sIdx].getName() << " E ASHELE PROXY KING!\n";
-        std::cout << "Bag er bhitor theke aro 5 ta fake attendance card paowa gese!\n";
+        std::cout << "Phone er WhatsApp e 5 jon absent friend er 'Present sir' daak dewar confession paowa gese!\n";
         std::cout << "(+10 Investigation Points squad er score e jog hoise!)\n" << Color::RESET;
         addTeamScore(10);
         m_detectivesWon = true;
         m_isGameOver = true;
     } else if (role == RoleType::PROXY_MEMBER) {
         std::cout << "\n" << Color::BOLD_GREEN << "🎯 TARGET HIT! " << m_suspects[sIdx].getName() << " PROXY GANG ER OPERATIVE!\n";
-        std::cout << "O onner proxy ditsilo, but ashol Mastermind ekhono dhora pore nai!\n";
+        std::cout << "O gala change kore arekjon er fake roll call ditsilo, but ashol Mastermind ekhono dhora pore nai!\n";
         std::cout << "(+5 Investigation Points squad er score e jog hoise!)\n" << Color::RESET;
         addTeamScore(5);
     } else {
         std::cout << "\n" << Color::BOLD_RED << "❌ SERIOUS VUL! " << m_suspects[sIdx].getName() << " EKDOM INNOCENT CHILO!\n";
-        std::cout << "\"Bhai amar attendance 95%, amar upore doubt korlen?!\"\n";
+        std::cout << "\"Sir ami shudhu nijer roll call e 'Present sir' bolsilam, onner ta dei nai!\"\n";
         std::cout << "(-3 Points penalty vul allegation dewar jonno!)\n" << Color::RESET;
         deductTeamScore(3);
     }
@@ -444,8 +444,8 @@ void GameEngine::startGame() {
     setupDetectives();
 
     std::cout << "\n" << Color::BOLD_YELLOW << "📢 INCIDENT REPORT (WEEK 2, SHOKAL 8:00 AM, ROOM 302):\n" << Color::RESET;
-    std::cout << Color::WHITE << "Sir dekhlen 40 jon enrolled student er jaygay sheet e 45 ta sign pore gese!\n";
-    std::cout << "Class er keu na keu hall e ghumano friend er jonno 5 ta fake proxy maira dise!\n";
+    std::cout << Color::WHITE << "Sir class e matha gune dekhlen 40 jon student boshe ache, kintu roll call e 45 jon 'Present sir' bolse!\n";
+    std::cout << "Pechon theke gala change kore 5 ta absent friend er fake proxy daak dewa hoise!\n";
     std::cout << "Round 4 shesh howar agei Proxy King re dhoro!\n" << Color::RESET;
 
     while (!m_isGameOver) {
