@@ -1,0 +1,11 @@
+# Build artifacts
+obj/
+*.o
+proxydiloke
+*.dSYM/
+
+# Runtime archives (optional to keep clean)
+data/case_archive.txt
+
+# OS metadata
+.DS_Store
