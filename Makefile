@@ -24,6 +24,6 @@ run: $(TARGET)
 	./$(TARGET)
 
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET) data/case_archive.txt
+	rm -rf $(OBJ_DIR) $(TARGET) $(TARGET).exe data/case_archive.txt
 
 .PHONY: all run clean
