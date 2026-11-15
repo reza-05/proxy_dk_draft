@@ -149,7 +149,7 @@ void GameEngine::handleInterrogate() {
 
     std::cout << "\n" << Color::BOLD_CYAN << "--- JIGESHBADER TOPIC SELECT KORO ---\n" << Color::RESET;
     std::cout << "  [1] Roll call er shomoy tumi koi chila?\n";
-    std::cout << "  [2] Roll call e kaoke gala change kore fake response dite dekhso/shunso?\n";
+    std::cout << "  [2] Roll call e kaoke voice change kore fake response dite dekhso/shunso?\n";
     std::cout << "  [3] Lecture er shomoy tomar alibi ke confirm korbe?\n";
     std::cout << "Topic select koro (1-3): ";
 
@@ -294,7 +294,7 @@ void GameEngine::handleClassVote() {
         m_isGameOver = true;
     } else if (role == RoleType::PROXY_MEMBER) {
         std::cout << "\n" << Color::BOLD_GREEN << "🎯 TARGET HIT! " << m_suspects[sIdx].getName() << " PROXY GANG ER OPERATIVE!\n";
-        std::cout << "O gala change kore arekjon er fake roll call ditsilo, but ashol Mastermind ekhono dhora pore nai!\n";
+        std::cout << "O voice change kore arekjon er fake roll call ditsilo, but ashol Mastermind ekhono dhora pore nai!\n";
         std::cout << "(+5 Investigation Points squad er score e jog hoise!)\n" << Color::RESET;
         addTeamScore(5);
     } else {
@@ -373,7 +373,7 @@ void GameEngine::startGame() {
 
     std::cout << "\n" << Color::BOLD_YELLOW << "📢 INCIDENT REPORT (WEEK 2, SHOKAL 8:00 AM, ROOM 302):\n" << Color::RESET;
     std::cout << Color::WHITE << "Sir class e matha gune dekhlen 40 jon student boshe ache, kintu roll call e 45 jon 'Present sir' bolse!\n";
-    std::cout << "Pechon theke gala change kore 5 ta absent friend er fake proxy daak dewa hoise!\n";
+    std::cout << "Pechon theke voice change kore 5 ta absent friend er fake proxy daak dewa hoise!\n";
     std::cout << "Round 4 shesh howar agei Proxy King re dhoro!\n" << Color::RESET;
 
     while (!m_isGameOver) {

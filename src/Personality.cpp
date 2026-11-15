@@ -30,9 +30,9 @@ std::string Personality::formatDialogue(Archetype archetype, QuestionTopic topic
             } else if (topic == QuestionTopic::SUSPICIOUS_ACTIVITY) {
                 response = isLie
                     ? "Amra to pechone phone chalaitsilam, sir roll dakse amra nijer ta disi, baki k ki bolse jani na."
-                    : "Mama, " + proxyKingName + " er dike ektu takao. O roll call er shomoy gala choto kore onner roll e 'Present sir' bolsilo!";
+                    : "Mama, " + proxyKingName + " er dike ektu takao. O roll call er shomoy voice change kore onner roll e 'Present sir' bolsilo!";
             } else {
-                response = "Pechoner bench e " + witness + " chilo, jiges koro ami gala change korsilam kina.";
+                response = "Pechoner bench e " + witness + " chilo, jiges koro ami voice change korsilam kina.";
             }
             break;
 
@@ -58,7 +58,7 @@ std::string Personality::formatDialogue(Archetype archetype, QuestionTopic topic
             } else if (topic == QuestionTopic::SUSPICIOUS_ACTIVITY) {
                 response = isLie
                     ? "Ami to ghum e chilam bhai, ke kar roll e 'Yes sir' bolse amar ki daay?"
-                    : "Adho-ghume chokh khule dekhsilam amar pasher chele ta gala mota kore arekjon er 'Present sir' bole dilo!";
+                    : "Adho-ghume chokh khule dekhsilam amar pasher chele ta voice change kore arekjon er 'Present sir' bole dilo!";
             } else {
                 response = "*High tulte tulte* " + witness + " re jiga, or dhakkay amar ghum bhaangsilo.";
             }
