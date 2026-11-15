@@ -253,8 +253,11 @@ If compiling manually in **PowerShell** or **Command Prompt**:
 # 1. Enable UTF-8 for ANSI color codes and emojis
 chcp 65001
 
-# 2. Compile with C++20
+# 2. Compile with C++20 (or C++14 if using older MinGW GCC 6.3.0)
 g++ -std=c++20 -Wall -Wextra -Iinclude src/CaseFile.cpp src/Character.cpp src/Detective.cpp src/Exceptions.cpp src/GameEngine.cpp src/Personality.cpp src/Statement.cpp src/Suspect.cpp src/main.cpp -o proxydiloke.exe
+
+# (Legacy GCC 6.3.0 fallback - if C++20 is unrecognized):
+g++ -std=c++14 -Wall -Wextra -Iinclude src/CaseFile.cpp src/Character.cpp src/Detective.cpp src/Exceptions.cpp src/GameEngine.cpp src/Personality.cpp src/Statement.cpp src/Suspect.cpp src/main.cpp -o proxydiloke.exe
 
 # 3. Launch game
 .\proxydiloke.exe
@@ -326,7 +329,7 @@ g++ -std=c++20 -Wall -Wextra -Iinclude src/*.cpp -o proxydiloke
 
 | Issue | Cause | Solution |
 | :--- | :--- | :--- |
-| `g++: error: unrecognized command-line option '-std=c++20'` | Your GCC compiler is older than version 10. | Upgrade your compiler to GCC 10 or newer (or clang++ 13+). |
+| `g++: error: unrecognized command-line option '-std=c++20'` | Your GCC compiler is older than version 10 (e.g. GCC 6.3.0). | Either: 1) Compile with `-std=c++14`, 2) Run `run.bat` (which automatically detects your GCC and falls back to C++14), or 3) Upgrade GCC via w64devkit. |
 | Boxes or question marks `?` appear in terminal (Windows) | Console code page is set to legacy ASCII. | Run `chcp 65001` before launching, or use `run.bat` which handles it automatically. |
 | `fatal error: include/CaseFile.h: No such file or directory` | Executing the command from outside the project root directory. | Make sure you `cd proxy_dk_draft` first, and keep the `-Iinclude` compiler flag. |
 | Missing `case_config.txt` error | Config file was deleted or moved. | The game engine features **self-healing auto-fallback**: if the file is absent, it automatically writes a fresh default config file and continues. |

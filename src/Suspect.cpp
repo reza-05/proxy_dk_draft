@@ -105,9 +105,13 @@ const std::string& Suspect::getTrueLocation() const {
 void Suspect::displayProfile() const {
     std::cout << Color::BOLD_CYAN << "👤 [Suspect] " << Color::BOLD_WHITE << m_name
               << " " << Color::DIM << "(" << archetypeToString(m_archetype) << ")" << Color::RESET << "\n"
-              << "   ID: " << Color::WHITE << m_id << Color::RESET << " | Status: "
-              << (m_isExposed ? Color::BOLD_RED + "[EXPOSED: " + roleToString(m_role) + "]"
-                              : Color::BOLD_YELLOW + "[Under Investigation]") << Color::RESET << "\n"
+              << "   ID: " << Color::WHITE << m_id << Color::RESET << " | Status: ";
+    if (m_isExposed) {
+        std::cout << Color::BOLD_RED << "[EXPOSED: " << roleToString(m_role) << "]";
+    } else {
+        std::cout << Color::BOLD_YELLOW << "[Under Investigation]";
+    }
+    std::cout << Color::RESET << "\n"
               << "   Statements on record: " << Color::CYAN << m_history.size() << Color::RESET << "\n";
 }
 
