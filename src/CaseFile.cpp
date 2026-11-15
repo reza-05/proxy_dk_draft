@@ -9,6 +9,20 @@
 
 namespace ProxyMystery {
 
+static std::string pickRandomOption(const std::string& input, std::mt19937& rng) {
+    std::vector<std::string> parts;
+    std::stringstream ss(input);
+    std::string item;
+    while (std::getline(ss, item, ';')) {
+        if (!item.empty()) {
+            parts.push_back(item);
+        }
+    }
+    if (parts.empty()) return input;
+    std::uniform_int_distribution<size_t> dist(0, parts.size() - 1);
+    return parts[dist(rng)];
+}
+
 void CaseFile::createDefaultConfigIfNotExists(const std::string& filePath) {
     std::ifstream check(filePath);
     if (check.is_open()) {
@@ -21,13 +35,13 @@ void CaseFile::createDefaultConfigIfNotExists(const std::string& filePath) {
         throw FileNotFoundException(filePath);
     }
 
-    out << "# Name|ID|Archetype(0:CR, 1:Backbencher, 2:Topper, 3:Sleeper, 4:Latecomer, 5:Gossip)|TrueLocation|FakeLocation\n";
-    out << "Tanvir|210041101|0|Room 302 er first row te boshe chilam|Pechoner bench e boshe adda ditesilam\n";
-    out << "Sakib|210041123|1|Room 302 er last bench e chil kortesilam|CDS e breakfast khaitesilam\n";
-    out << "Nabila|210041145|2|Room 302 er first row te lab report likhtesilam|Corridor e lab partner er shathe chilam\n";
-    out << "Rafi|210041156|3|Room 302 er 3 number desk e ghumaitesilam|Washroom e mukhe pani dite gesilam\n";
-    out << "Fahim|210041178|4|Boardbazar jam e atka theke dauraya ashsi|Rocket e cha khaitesilam tai late hoise\n";
-    out << "Farhana|210041199|5|Room 302 er majhkhaner row te boshsilam|CDS e kotha boltisilam tai deri hoise\n";
+    out << "# Name|ID|Archetype(0:CR, 1:Backbencher, 2:Topper, 3:Sleeper, 4:Latecomer, 5:Gossip)|TrueLocations(;)|FakeLocations(;)\n";
+    out << "Tanvir|210041101|0|Room 302 er first row te boshe chilam;Podium er kache multimedia projector on kortesilam;Sir er table er samne attendance sheet check kortesilam|Pechoner bench e boshe adda ditesilam;Department office e duster ante gesilam;Corridor e CR der shathe kotha boltisilam\n";
+    out << "Sakib|210041123|1|Room 302 er last bench e chil kortesilam;Pechoner row te boshe cricket score dekhtesilam;Corner desk e boshe headphone e gaan shuntesilam|CDS e breakfast khaitesilam;Rocket e cha khaitesilam;Hostel er shamne chill kortesilam\n";
+    out << "Nabila|210041145|2|Room 302 er first row te lab report likhtesilam;First bench e slide notes revision ditsilam;Lab manual dekhe algorithm trace kortesilam|Corridor e lab partner er shathe chilam;Library theke reference book ante gesilam;Department office e notice board dekhtesilam\n";
+    out << "Rafi|210041156|3|Room 302 er 3 number desk e ghumaitesilam;AC er thanda batash e matha nichu kore ghumaitesilam;Pechoner row te desk e matha thikaye ghumaitesilam|Washroom e mukhe pani dite gesilam;Hostel e late kore uthsi tai ghum bhange nai;Medical center e matha bathar medicine nite gesilam\n";
+    out << "Fahim|210041178|4|Boardbazar jam e atka theke dauraya ashsi;Gazipur chourasta theke auto paowa jacchilo na;Shokal 7:30 er IUT bus miss kore dauraya ashsi|Rocket e cha order disilam tai late hoise;Main gate e ID card check e line chilo;Hostel er room e bag fele ashsilam\n";
+    out << "Farhana|210041199|5|Room 302 er majhkhaner row te boshsilam;Dorjar pashe boshe ke k ashse count kortesilam;Row 3 te boshe friend er shathe kotha boltisilam|CDS e kotha boltisilam tai deri hoise;Corridor e 2nd year der jhamelar khobor shuntesilam;Cafeteria te gossip kortesilam\n";
 
     out.close();
 }
@@ -101,8 +115,11 @@ void CaseFile::loadSuspectsFromFile(const std::string& filePath,
             role = RoleType::PROXY_MEMBER;
         }
 
+        std::string chosenTrueLoc = pickRandomOption(rawList[i].trueLoc, g);
+        std::string chosenFakeLoc = pickRandomOption(rawList[i].fakeLoc, g);
+
         outSuspects.emplace_back(rawList[i].name, rawList[i].id, rawList[i].arch,
-                                role, rawList[i].trueLoc, rawList[i].fakeLoc);
+                                role, chosenTrueLoc, chosenFakeLoc);
     }
 }
 
