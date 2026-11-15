@@ -18,16 +18,21 @@ GameEngine::GameEngine(std::string configPath, std::string archivePath)
 
 void GameEngine::printBanner() const {
     std::cout << "\n";
-    std::cout << "======================================================================\n";
-    std::cout << "   ____  ____  ______  ____  __   ____  ____   ___       __  ________ \n";
-    std::cout << "  / __ \\/ __ \\/ __ \\ \\/ /\\ \\/ /  / __ \\/  _/  /   |     / / / /_  __/ \n";
-    std::cout << " / /_/ / /_/ / / / /\\  /  \\  /  / / / // /   / /| |    / / / / / /    \n";
-    std::cout << "/ ____/ _, _/ /_/ / / /   / /  / /_/ // /   / ___ |   / /_/ / / /     \n";
-    std::cout << "/_/   /_/ |_|\\____/ /_/  /_/  /_____/___/  /_/  |_|   \\____/ /_/      \n";
-    std::cout << "                --- THE IUT ATTENDANCE MYSTERY ---                    \n";
-    std::cout << "======================================================================\n";
-    std::cout << "   4 Investigators. A Room Full of Suspects. Expose the Proxy King!   \n";
-    std::cout << "======================================================================\n\n";
+    std::cout << "+------------------------------------------------------------------+\n";
+    std::cout << "|                                                                  |\n";
+    std::cout << "|       ██████╗ ██████╗  ██████╗ ██╗  ██╗██╗   ██╗                 |\n";
+    std::cout << "|       ██╔══██╗██╔══██╗██╔═══██╗╚██╗██╔╝╚██╗ ██╔╝                 |\n";
+    std::cout << "|       ██████╔╝██████╔╝██║   ██║ ╚███╔╝  ╚████╔╝                  |\n";
+    std::cout << "|       ██╔═══╝ ██╔══██╗██║   ██║ ██╔██╗   ╚██╔╝                   |\n";
+    std::cout << "|       ██║     ██║  ██║╚██████╔╝██╔╝ ██╗   ██║                    |\n";
+    std::cout << "|       ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝                    |\n";
+    std::cout << "|                                                                  |\n";
+    std::cout << "|                D I L O   K E ?   (Room 302 Mystery)              |\n";
+    std::cout << "|                                                                  |\n";
+    std::cout << "+------------------------------------------------------------------+\n";
+    std::cout << "|      IUT Attendance Syndicate: 45 Signatures, 40 Students!       |\n";
+    std::cout << "|    4 Detectives. A Room Full of Suspects. Catch the King!        |\n";
+    std::cout << "+------------------------------------------------------------------+\n\n";
 }
 
 int GameEngine::getTeamScore() const {
